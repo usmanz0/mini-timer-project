@@ -1,0 +1,111 @@
+:root {
+  /* Font Sizes */
+  --font-heading-size: 14px;
+  --font-paragraph-size: 12px;
+  --font-label-size: 12px;
+
+  /* Line Heights */
+  --line-heading: 110%;
+  --line-paragraph: 100%;
+  --line-label: 100%;
+
+  /* Letter Spacing */
+  --letter-heading: -0.05em;
+  --letter-paragraph: 0em;
+  --letter-label: 0.05em;
+
+  /* Font Weights */
+  --weight-heading: 600;
+  --weight-paragraph: 400;
+  --weight-label: 400;
+}
+
+@media (min-width: 700px) {
+  :root {
+    --font-heading-size: 18px;
+    --font-paragraph-size: 16px;
+    --font-label-size: 14px;
+
+    --line-heading: 120%;
+    --line-paragraph: 135%;
+    --line-label: 110%;
+
+    --letter-heading: -3%;
+    --letter-paragraph: -5%;
+    --letter-label: 5%;
+
+    --weight-heading: 600;
+    --weight-paragraph: 400;
+    --weight-label: 400;
+  }
+}
+
+.heading-text {
+  font-size: var(--font-heading-size);
+  line-height: var(--line-heading);
+  letter-spacing: var(--letter-heading);
+  font-weight: var(--weight-heading);
+}
+
+.paragraph-text {
+  font-size: var(--font-paragraph-size);
+  line-height: var(--line-paragraph);
+  letter-spacing: var(--letter-paragraph);
+  font-weight: var(--weight-paragraph);
+}
+
+.label-text {
+  font-size: var(--font-label-size);
+  line-height: var(--line-label);
+  letter-spacing: var(--letter-label);
+  font-weight: var(--weight-label);
+  color: white;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+body,
+button {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+p,h1,h2,h3 {
+  margin: 0;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -3%;
+  text-transform: uppercase;
+}
+
+.main-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 14px;
+  border-bottom: 2px solid black;
+}
+
+.settings-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
