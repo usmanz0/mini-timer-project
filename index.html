@@ -18,31 +18,47 @@
     <button class="settings-button" aria-label="Settings"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></button>
   </header>
 
-  <section class="input-years-card">
-    <p class="paragraph-text question-card-number">1/2</p>
+  <section class="input-card">
+    <p class="paragraph-text question-card-number" id="cardNumber">1/2</p>
+    <div class="question-card1 ">
+      <h1 class="heading-text question-card-prompt">
+        How many years do you think you have left until death?
+      </h1>
+      <p class="paragraph-text question-card-prompt2">(from today)</p>
 
-    <h1 class="heading-text years-card-prompt">
-      How many years do you think you have left until death?
-    </h1>
-    <p class="paragraph-text years-card-prompt2">(from today)</p>
+      <label for="yearsRange" class="visually-hidden">Select remaining years</label>
 
-    <label for="yearsRange" class="visually-hidden">Select remaining years</label>
+      <input class="years-counter" id="rangeValue" type="text" placeholder="00">
 
-    <input class="years-counter" id="rangeValue" type="text" placeholder="00">
+      <input
+        id="yearsRange"
+        class="years-selector"
+        type="range"
+        min="0"
+        max="100"
+        value="0"
+        aria-valuemin="1"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+      <p class="years-error-message" id="yearsError"></p>
+      <button class="label-text years-continue-button" id="yearsContinue">CONTINUE</button>
+    </div>
+    
+    <div class="question-card2 hidden">
+      <h1 class="heading-text question-card-prompt">
+        What do you want to achieve before you are gone ?
+      </h1>
+      <p class="paragraph-text question-card-prompt2">(Goals)</p>
 
-    <input
-      id="yearsRange"
-      class="years-selector"
-      type="range"
-      min="0"
-      max="100"
-      value="0"
-      aria-valuemin="1"
-      aria-valuemax="100"
-      aria-valuenow="0"
-    >
-    <p class="years-error-message" id="yearsError"></p>
-    <button class="label-text years-continue-button" id="yearsContinue">CONTINUE</button>
+      <ul class="goals-list" id="goalsList">
+        
+      </ul>
+      
+      <button class="add-goals-button" id="addGoals"><img src="images/plus-icon.svg" alt="add Button icon"></button>
+
+      <button class="label-text goals-continue-button">CONTINUE</button>
+    </div>
   </section>
 
 

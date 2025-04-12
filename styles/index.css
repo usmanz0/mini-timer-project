@@ -1,10 +1,6 @@
-.input-years-card {
+.input-card {
   margin: 64px auto;
   width: 50vw;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 24px;
   box-shadow:
    rgba(158, 158, 158, 0.09) 0 26px 26px,
@@ -13,17 +9,41 @@
    border-top: 2px solid rgba(0, 0, 0, 1);
 }
 
+.question-card1,
+.question-card2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 55px;
+}
+
+.hidden {
+  display: none;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
 .question-card-number {
   align-self: baseline;
   color: rgba(0, 0, 0, 0.2);
 }
 
-.years-card-prompt {
+.question-card-prompt {
   font-weight: 500;
   line-height: 135%;
   letter-spacing: -5%;
 }
-.years-card-prompt2 {
+.question-card-prompt2 {
   color: rgba(0, 0, 0, 0.2);
 }
 
@@ -42,24 +62,36 @@
 .years-selector {
   appearance: none;
   height: 6px;  
-  background: #ccc;  
+  background: #dedede;  
   border-radius: 3px;  
   outline: none;
   cursor: pointer;
+  accent-color: black;
 }
-
-
 
 .years-error-message {
   color: red;
   font-size: 14px;
   margin: 4px 0;
+  height: 14px;
 }
 
-.years-continue-button {
+.years-continue-button,
+.goals-continue-button {
   background-color: rgba(0, 0, 0, 1);
   padding: 8px 34px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  margin-top: 32px;
+}
+
+/* GOALS CARD */
+
+.goals-list
+
+.add-goals-button {
+  border: none;
+  cursor: pointer;
+  margin-top: 21px;
 }
