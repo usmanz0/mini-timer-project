@@ -13,13 +13,25 @@
 
 </head>
 <body>
+  <!-- HEADER -->
   <header class="main-heading">
     <h1 class="logo-text">The Countdown</h1>
     <button class="settings-button" aria-label="Settings"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></button>
   </header>
 
-  <section class="input-card">
-    <p class="paragraph-text question-card-number" id="cardNumber">1/2</p>
+  <!-- OVERLAY -->
+  <div class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="goals-modal">
+      <input class="modal-input" id="inputGoalsModal" maxlength="100" type="text" placeholder="Short Text">
+      <button class="add-button label-text" id="addGoalsModal" aria-label="Add Button">ADD</button>
+    </div>
+  </div>
+
+  <!-- INPUT QUESTION CARD -->
+  <section class="input-card hidden" id="questionCard">
+    <p class="paragraph-text question-card-number" id="cardNumber"></p>
+
+    <!-- QUESTION CARD 1 -->
     <div class="question-card1 ">
       <h1 class="heading-text question-card-prompt">
         How many years do you think you have left until death?
@@ -45,22 +57,60 @@
       <button class="label-text years-continue-button" id="yearsContinue">CONTINUE</button>
     </div>
     
-    <div class="question-card2 hidden">
+    <!-- QUESTION CARD 2 -->
+    <div class="question-card2 hidden fade-out">
       <h1 class="heading-text question-card-prompt">
         What do you want to achieve before you are gone ?
       </h1>
       <p class="paragraph-text question-card-prompt2">(Goals)</p>
 
       <ul class="goals-list" id="goalsList">
-        
+ 
       </ul>
       
       <button class="add-goals-button" id="addGoals"><img src="images/plus-icon.svg" alt="add Button icon"></button>
-
-      <button class="label-text goals-continue-button">CONTINUE</button>
+      <p class="goals-error-message" id="goalsError"></p>
+      <button class="label-text goals-continue-button" id="goalsContinue">CONTINUE</button>
     </div>
   </section>
 
+  <section class="main-page">
+
+    <section class="countdown-timer-section">
+      <div class="time-unit">
+        <span class="time-value">18960</span>
+        <small>DAYS</small>
+      </div>
+      <div class="time-unit">
+        <span class="time-value">22</span>
+        <small>HOURS</small>
+      </div>
+      <div class="time-unit">
+        <span class="time-value">35</span>
+        <small>MINUTES</small>
+      </div>
+      <div class="time-unit">
+        <span class="time-value">45</span>
+        <small>SECONDS</small>
+      </div>
+    </section>
+
+    <section class="pomodoro-section">
+      <div class="pomodoro-heading">POMODORO</div>
+
+      <div class="timer">
+        <div class="time-unit">
+          <span class="time-value">22</span>
+          <small>MINUTES</small>
+        </div>
+        <p>:</p>
+        <div class="time-unit">
+          <span class="time-value">35</span>
+          <small>SECONDS</small>
+        </div>
+      </div>
+    </section>
+  </section>
 
   <script src="scripts/index.js"></script>
 </body>

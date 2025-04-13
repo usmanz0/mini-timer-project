@@ -40,6 +40,32 @@
   }
 }
 
+:root {
+  /* Base Colors */
+  --base-600: rgba(255, 255, 255, 1);
+  --base-500: rgba(250, 250, 250, 1);
+  --base-400: rgba(230, 230, 230, 1);
+  --base-300: rgba(215, 215, 215, 1);
+  --base-200: rgba(200, 200, 200, 1);
+  --base-100: rgba(186, 186, 186, 1);
+
+  /* Mid Colors */
+  --mid-600: rgba(171, 171, 171, 1);
+  --mid-500: rgba(141, 141, 141, 1);
+  --mid-400: rgba(112, 112, 112, 1);
+  --mid-300: rgba(82, 82, 82, 1);
+  --mid-200: rgba(66, 66, 66, 1);
+  --mid-100: rgba(49, 49, 49, 1);
+
+  /* Contrast Colors */
+  --contrast-500: rgba(33, 33, 33, 1);
+  --contrast-400: rgba(25, 25, 25, 1);
+  --contrast-300: rgba(16, 16, 16, 1);
+  --contrast-200: rgba(8, 8, 8, 1);
+  --contrast-100: rgba(0, 0, 0, 1);
+}
+
+
 .heading-text {
   font-size: var(--font-heading-size);
   line-height: var(--line-heading);
@@ -68,14 +94,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-
-body,
-button {
   font-family: 'Inter', sans-serif;
-
 }
+
+
 
 p,h1,h2,h3 {
   margin: 0;
