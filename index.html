@@ -28,7 +28,7 @@
   </div>
 
   <!-- INPUT QUESTION CARD -->
-  <section class="input-card hidden" id="questionCard">
+  <section class="input-card " id="questionCard">
     <p class="paragraph-text question-card-number" id="cardNumber"></p>
 
     <!-- QUESTION CARD 1 -->
@@ -74,8 +74,7 @@
     </div>
   </section>
 
-  <section class="main-page">
-
+  <section class="main-page hidden" id="mainPage">
     <section class="countdown-timer-section">
       <div class="time-unit">
         <span class="time-value">18960</span>
@@ -96,18 +95,49 @@
     </section>
 
     <section class="pomodoro-section">
-      <div class="pomodoro-heading">POMODORO</div>
+      <div class="content-heading heading-text">POMODORO</div>
+      <div class="timer-content">
+        <div class="timer">
+          <div class="time-unit">
+            <span class="time-value">22</span>
+            <small>MINUTES</small>
+          </div>
+          <p class="timer-seperator">:</p>
+          <div class="time-unit">
+            <span class="time-value">35</span>
+            <small>SECONDS</small>
+          </div>
+        </div>
+  
+        <ul class="pomodoro-timer-button-list">
+          <li><button class="active-timer-button paragraph-text timer-button">FOCUS</button></li>
+          <li><button class="paragraph-text timer-button">SHORT BREAK</button></li>
+          <li><button class="paragraph-text timer-button">LONG BREAK</button></li>
+        </ul>
 
-      <div class="timer">
-        <div class="time-unit">
-          <span class="time-value">22</span>
-          <small>MINUTES</small>
-        </div>
-        <p>:</p>
-        <div class="time-unit">
-          <span class="time-value">35</span>
-          <small>SECONDS</small>
-        </div>
+        <button class="pomodoro-start-button">START</button>
+      </div>
+    </section>
+
+    <section class="task-section">
+      <div class="content-heading heading-text">TASKS</div>
+
+      <div class="task-content">
+        <ul class="task-list">
+
+        </ul>
+        <button class="task-add-button label-text">ADD</button>
+      </div>
+    </section>
+
+    <section class="goals-section">
+      <div class="content-heading heading-text">GOALS</div>
+
+      <div class="goals-content">
+        <ul class="goals-list-main" id="goalsListMain">
+
+        </ul>
+        <button class="add-goals-button-main label-text" id="addGoalsMain">ADD</button>
       </div>
     </section>
   </section>

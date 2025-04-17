@@ -7,6 +7,7 @@ const addGoalsElement = document.getElementById('addGoals');
 const overlay = document.querySelector('.overlay');
 const addGoalsModalElement = document.getElementById('addGoalsModal');
 const goalsContinueElement = document.getElementById('goalsContinue');
+const addGoalsMainElement = document.getElementById('addGoalsMain');
 let yearsValue;
 let currentCard = 1;
 const goalsList = [];
@@ -36,33 +37,51 @@ yearsContinueElement.addEventListener('click', () => {
   
 })
 
-addGoalsElement.addEventListener('click', () => {
-  // if (goalsList.length === 0) {
-  //   document.getElementById('goalsError').innerHTML = 'Max Limit Reached';
-  //   setTimeout(() => {
-  //     document.getElementById('goalsError').innerHTML = '';
-  //   },1500)
-  // } else {
-  // }
 
+let interactionStartedOnModal = false;
+
+addGoalsElement.addEventListener('click', hideOverlay);
+addGoalsMainElement.addEventListener('click', hideOverlay);
+
+function hideOverlay() {
   const modal = document.querySelector('.goals-modal');
-  overlay.classList.remove('hidden')
+  overlay.classList.remove('hidden');
+}
 
-  modal.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  overlay.addEventListener('click', () => {
-    overlay.classList.add('hidden')
-  })
+const modal = document.querySelector('.goals-modal');
+modal.addEventListener('mousedown', (e) => {
+  interactionStartedOnModal = true;
+  e.stopPropagation();
 });
 
+overlay.addEventListener('mousedown', () => {
+  interactionStartedOnModal = false;
+});
+
+overlay.addEventListener('mouseup', () => {
+  if (!interactionStartedOnModal) {
+    overlay.classList.add('hidden');
+  }
+  interactionStartedOnModal = false;
+});
 
 addGoalsModalElement.addEventListener('click', () => {
-  const inputGoalsModal = document.getElementById('inputGoalsModal');
-  addGoals(inputGoalsModal.value);
+  if (inputGoalsModal.value === '') {
+    document.getElementById('goalsError').innerHTML = 'Field cannot be empty'
+    overlay.classList.add('hidden');
+  } else {
+    const inputGoalsModal = document.getElementById('inputGoalsModal');
+    addGoals(inputGoalsModal.value);
+    document.getElementById('goalsError').innerHTML = ''
+    overlay.classList.add('hidden');
+  }
+});
 
-  overlay.classList.add('hidden')
-})
+document.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    interactionStartedOnModal = false;
+  }, 0);
+});
 
 function addGoals(goal) {
   goalsList.push(goal);
@@ -71,10 +90,13 @@ function addGoals(goal) {
 
 function renderGoalsList () {
   let goalsHTML = '';
+  let goalsHTMLMain = '';
   goalsList.forEach((goalsObject) => {
     goalsHTML += `<li class="paragraph-text" id="goals">${goalsObject}</li>`;
+    goalsHTMLMain += `<li class="paragraph-text" id="goals"><input class="goals-main-checkbox" type="checkbox"><p>${goalsObject}</p></li>`;
   })
   document.getElementById('goalsList').innerHTML = goalsHTML;
+  document.getElementById('goalsListMain').innerHTML = goalsHTMLMain;
 };
 
 function nextCard() {
@@ -97,6 +119,17 @@ function nextCard() {
 };
 
 goalsContinueElement.addEventListener('click', () => {
-  document.getElementById('questionCard').
-    classList.add('fade-out')
+  const mainPageEl = document.getElementById('mainPage')
+  const questionCardEl = document.getElementById('questionCard');
+
+  questionCardEl.classList.add('fade-out')
+
+  setTimeout(() => {
+    questionCardEl.classList.add('hidden');
+
+    mainPageEl.classList.remove('hidden');
+    mainPageEl.classList.add('fade-in');
+  }, 500);
+
+
 })
