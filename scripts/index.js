@@ -12,8 +12,10 @@ let yearsValue;
 let currentCard = 1;
 const goalsList = [];
 
+// UPDATED THE CARD NUMBER 
 questionNumber.innerHTML = `${currentCard}/2`
 
+// INPUT RANGE STYLING
 rangeInput.addEventListener('input', () => {
   rangeValue.style.color = 'black';
   rangeValue.value = rangeInput.value.padStart(2, '0');
@@ -24,6 +26,7 @@ rangeInput.addEventListener('mousedown', () => {
   yearsError.innerHTML = ''
 })
 
+// CONTINUE BUTTON FUNCTIONALITY OF QUESTION 1 CARD
 yearsContinueElement.addEventListener('click', () => {
   if (rangeValue.value === '0' || rangeInput.value === '0') {
     rangeValue.style.borderColor = 'red'
@@ -34,10 +37,9 @@ yearsContinueElement.addEventListener('click', () => {
     yearsValue = Number(rangeInput.value);
     nextCard();
   }
-  
 })
 
-
+// LOGIC FOR CLOSING AND OPENING OVERLAY
 let interactionStartedOnModal = false;
 
 addGoalsElement.addEventListener('click', hideOverlay);
@@ -65,6 +67,7 @@ overlay.addEventListener('mouseup', () => {
   interactionStartedOnModal = false;
 });
 
+// FUNCTIONALITY OF ADD BUTTON FOR OVERLAY 
 addGoalsModalElement.addEventListener('click', () => {
   if (inputGoalsModal.value === '') {
     document.getElementById('goalsError').innerHTML = 'Field cannot be empty'
@@ -83,11 +86,12 @@ document.addEventListener('mouseup', () => {
   }, 0);
 });
 
+// LOGIC OF ADDING GOALS AKA TODOS
 function addGoals(goal) {
   goalsList.push(goal);
   renderGoalsList();
 };
-
+// THIS FUNCTION WILL RENDER THE TODO AND UPDATES
 function renderGoalsList () {
   let goalsHTML = '';
   let goalsHTMLMain = '';
@@ -99,6 +103,7 @@ function renderGoalsList () {
   document.getElementById('goalsListMain').innerHTML = goalsHTMLMain;
 };
 
+// ANIMATION FOR QUESTION CARDS TRANSITION
 function nextCard() {
   const currentCardElement = document.querySelector(`.question-card${currentCard}`);
   const nextCardElement = document.querySelector(`.question-card${currentCard + 1}`);
@@ -118,6 +123,7 @@ function nextCard() {
   }, 500);
 };
 
+// CONTINUE BUTTON OF QUESTION 2 CARD
 goalsContinueElement.addEventListener('click', () => {
   const mainPageEl = document.getElementById('mainPage')
   const questionCardEl = document.getElementById('questionCard');
