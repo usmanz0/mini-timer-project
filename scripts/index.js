@@ -139,3 +139,24 @@ goalsContinueElement.addEventListener('click', () => {
 
 
 })
+
+/* 
+Optimized Rendering - Orphelo Motapa
+function renderGoals(withCheckbox = false) {
+  const target = document.getElementById('goalsList');
+  if (!target) return;
+
+  let html = '';
+
+  goalsList.forEach(goal => {
+    html += `
+      <li class="paragraph-text">
+        ${withCheckbox 
+          ? `<input class="goals-main-checkbox" type="checkbox"><p>${goal}</p>`
+          : `${goal}`
+        }
+      </li>`;
+  });
+
+  target.innerHTML = html;
+} */
