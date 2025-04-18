@@ -233,6 +233,31 @@ goalsContinueElement.addEventListener('click', () => {
 
 })
 
+
+
+shortBreakElement.addEventListener('click',() => toggleButton(shortBreakElement));
+focusElement.addEventListener('click',() => toggleButton(focusElement));
+longBreakElement.addEventListener('click',() => toggleButton(longBreakElement));
+
+function toggleButton(buttonElement) {
+
+  if (!buttonElement.classList.contains('timer-is-toggled')) {
+    turnOffPreviousButton();
+    buttonElement.classList.add('timer-is-toggled');
+  } else {
+    buttonElement.classList.remove('timer-is-toggled');
+  }
+  
+}
+
+function turnOffPreviousButton() {
+  let previousButton = document.querySelector('.timer-is-toggled');
+  if (previousButton) {
+    previousButton.classList.remove('timer-is-toggled');
+  };
+}
+
+
 /* 
 Optimized Rendering - Orphelo Motapa
 function renderGoals(withCheckbox = false) {
