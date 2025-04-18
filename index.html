@@ -110,9 +110,9 @@
         </div>
   
         <ul class="pomodoro-timer-button-list">
-          <li><button class="active-timer-button paragraph-text timer-button">FOCUS</button></li>
-          <li><button class="paragraph-text timer-button">SHORT BREAK</button></li>
-          <li><button class="paragraph-text timer-button">LONG BREAK</button></li>
+          <li><button class="timer-button paragraph-text timer-button" id="focusButton">FOCUS</button></li>
+          <li><button class="paragraph-text timer-button" id="shortBreakButton">SHORT BREAK</button></li>
+          <li><button class="paragraph-text timer-button" id="longBreakButton">LONG BREAK</button></li>
         </ul>
 
         <button class="pomodoro-start-button">START</button>
@@ -123,19 +123,19 @@
       <div class="content-heading heading-text">TASKS</div>
 
       <div class="task-content">
-        <ul class="task-list">
-
+        <ul class="task-list" id="taskList">
+          <li style="color: rgb(200, 200, 200);">Added tasks are shown here</li>
         </ul>
         <button class="task-add-button label-text">ADD</button>
       </div>
     </section>
 
     <section class="goals-section">
-      <div class="content-heading heading-text">GOALS</div>
+      <div class="content-heading heading-text">GOALS<span style="color: var( --mid-500); font-weight: 400;"> (long term goals)</span></div>
 
       <div class="goals-content">
         <ul class="goals-list-main" id="goalsListMain">
-
+          <li  style="color: rgb(200, 200, 200);">Added goals are shown here</li>
         </ul>
         <button class="add-goals-button-main label-text" id="addGoalsMain">ADD</button>
       </div>

@@ -106,14 +106,16 @@
 }
 /* Hide scrollbar track (Chrome, Safari, Edge) */
 .goals-list::-webkit-scrollbar,
-.goals-list-main::-webkit-scrollbar {
+.goals-list-main::-webkit-scrollbar,
+.task-list::-webkit-scrollbar {
   width: 10px;
   background: transparent;         /* Removes track visibility */
 }
 
 /* Only show slim black thumb */
 .goals-list::-webkit-scrollbar-thumb,
-.goals-list-main::-webkit-scrollbar-thumb {
+.goals-list-main::-webkit-scrollbar-thumb,
+.task-list::-webkit-scrollbar-thumb {
   background-color: rgb(83, 83, 83);
   border-radius: 8px;
   border: 2px solid transparent; /* Creates "margin" inside the track */
@@ -122,7 +124,8 @@
 
 /* Hide scrollbar corner (for scrollable areas that intersect) */
 .goals-list::-webkit-scrollbar-corner,
-.goals-list-main::-webkit-scrollbar-corner {
+.goals-list-main::-webkit-scrollbar-corner,
+.task-list::-webkit-scrollbar-corner{
   background: transparent;
 }
 
@@ -242,6 +245,7 @@
     rgba(0, 0, 0, 0.09) 0 25px 25px
   ;
   padding: 24px 48px;
+  width: 100%;
 }
 
 .timer-seperator {
@@ -280,12 +284,13 @@
 }
 
 .timer-button {
-  padding: 8px;
+  padding: 8px 16px;
   border: none;
   background: transparent;
+  font-weight: 600;
 }
 
-.active-timer-button {
+.timer-is-toggled {
   color: white;
   background-color: var(--contrast-500);
   border-radius: 8px;
@@ -303,7 +308,8 @@
 
 
 /* GOALS SECTION */
-.goals-content {
+.goals-content,
+.task-content {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -312,12 +318,13 @@
   align-items: end;
 }
 
-.goals-list-main {
+.goals-list-main,
+.task-list {
   background-color: var(--contrast-500);
   color: white;
   padding: 16px;
   width: 395px;
-  max-height: 240px;
+  height: 240px;
   overflow-y: scroll;
   word-wrap: break-word;
   border: none;
@@ -331,14 +338,16 @@
   -ms-overflow-style: none;       
 }
 
-.goals-list-main li {
+.goals-list-main li,
+.task-list li {
  display: flex;
  gap: 8px;
  align-items: center;
 }
 
 /* General checkbox base */
-.goals-main-checkbox {
+.goals-main-checkbox,
+.task-checkbox {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
@@ -351,12 +360,14 @@
   transition: all 0.2s ease;
 }
 
-.goals-main-checkbox:checked {
+.goals-main-checkbox:checked,
+.task-checkbox:checked {
   background-color: white;
   border: 2px solid white;
 }
 
-.goals-main-checkbox:checked::after {
+.goals-main-checkbox:checked::after,
+.task-checkbox:checked::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -370,7 +381,8 @@
   transform: translate(-50%, -50%);
 }
 
-.add-goals-button-main {
+.add-goals-button-main,
+.task-add-button {
   background-color: var(--contrast-100);
   color: white;
   border: none;

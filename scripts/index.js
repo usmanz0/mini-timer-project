@@ -8,9 +8,22 @@ const overlay = document.querySelector('.overlay');
 const addGoalsModalElement = document.getElementById('addGoalsModal');
 const goalsContinueElement = document.getElementById('goalsContinue');
 const addGoalsMainElement = document.getElementById('addGoalsMain');
+const focusElement = document.getElementById('focusButton');
+const shortBreakElement = document.getElementById('shortBreakButton');
+const longBreakElement = document.getElementById('longBreakButton');
+const questionCardEl = document.getElementById('questionCard');
+const mainPageEl = document.getElementById('mainPage')
+const goalsList = [];
+const tasksList = [];
+
 let yearsValue;
 let currentCard = 1;
-const goalsList = [];
+
+
+if (localStorage.getItem('questionAsked') === 'true') {
+  questionCardEl.classList.add('hidden');
+  mainPageEl.classList.remove('hidden')
+}
 
 // UPDATED THE CARD NUMBER 
 questionNumber.innerHTML = `${currentCard}/2`
@@ -41,12 +54,19 @@ yearsContinueElement.addEventListener('click', () => {
 
 // LOGIC FOR CLOSING AND OPENING OVERLAY
 let interactionStartedOnModal = false;
+let trackOverlay = false;
+
+const addTaskButton = document.querySelector('.task-add-button');
 
 addGoalsElement.addEventListener('click', hideOverlay);
 addGoalsMainElement.addEventListener('click', hideOverlay);
+addTaskButton.addEventListener('click', () => {
+  hideOverlay();
+  trackOverlay = true;
+})
+
 
 function hideOverlay() {
-  const modal = document.querySelector('.goals-modal');
   overlay.classList.remove('hidden');
 }
 
@@ -67,15 +87,20 @@ overlay.addEventListener('mouseup', () => {
   interactionStartedOnModal = false;
 });
 
+const inputGoalsModal = document.getElementById('inputGoalsModal');
+
 // FUNCTIONALITY OF ADD BUTTON FOR OVERLAY 
 addGoalsModalElement.addEventListener('click', () => {
   if (inputGoalsModal.value === '') {
     document.getElementById('goalsError').innerHTML = 'Field cannot be empty'
     overlay.classList.add('hidden');
-  } else {
-    const inputGoalsModal = document.getElementById('inputGoalsModal');
+  } else if (!trackOverlay) {
     addGoals(inputGoalsModal.value);
     document.getElementById('goalsError').innerHTML = ''
+    overlay.classList.add('hidden');
+  } else {
+    addTask(inputGoalsModal.value);
+    trackOverlay = false;
     overlay.classList.add('hidden');
   }
 });
@@ -88,20 +113,92 @@ document.addEventListener('mouseup', () => {
 
 // LOGIC OF ADDING GOALS AKA TODOS
 function addGoals(goal) {
-  goalsList.push(goal);
+  goalsList.push({ text: goal, checked: false });
   renderGoalsList();
-};
+}
+
 // THIS FUNCTION WILL RENDER THE TODO AND UPDATES
 function renderGoalsList () {
   let goalsHTML = '';
   let goalsHTMLMain = '';
-  goalsList.forEach((goalsObject) => {
-    goalsHTML += `<li class="paragraph-text" id="goals">${goalsObject}</li>`;
-    goalsHTMLMain += `<li class="paragraph-text" id="goals"><input class="goals-main-checkbox" type="checkbox"><p>${goalsObject}</p></li>`;
-  })
+
+  goalsList.forEach((goalObject, index) => {
+    goalsHTML += `<li class="paragraph-text" id="goals">${goalObject.text}</li>`;
+    goalsHTMLMain += ` 
+      <li class="paragraph-text" id="goalsMain">
+      <input 
+        class="goals-main-checkbox" 
+        type="checkbox" 
+        data-index="${index}" 
+        ${goalObject.checked ? 'checked' : ''}
+      >
+      <p>
+        ${goalObject.text}
+      </p>
+      </li>
+    `;
+  });
+
   document.getElementById('goalsList').innerHTML = goalsHTML;
   document.getElementById('goalsListMain').innerHTML = goalsHTMLMain;
-};
+
+document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
+  checkbox.addEventListener('change', (e) => {
+    const index = e.target.dataset.index;
+    goalsList[index].checked = e.target.checked;
+
+    const goalText = e.target.nextElementSibling;
+    goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+  });
+
+  const goalText = checkbox.nextElementSibling;
+  if (checkbox.checked) {
+    goalText.style.textDecoration = 'line-through';
+  }
+});
+
+}
+
+// ADDING TASKS
+function addTask(task) {
+  tasksList.push({ text: task, checked: false });
+  renderTasksList();
+}
+function renderTasksList () {
+  let tasksHTML = '';
+
+  tasksList.forEach((taskObject, index) => {
+    tasksHTML += `
+      <li class="paragraph-text task-item">
+        <input 
+          class="task-checkbox" 
+          type="checkbox" 
+          data-index="${index}" 
+          ${taskObject.checked ? 'checked' : ''}
+        >
+        <p>${taskObject.text}</p>
+      </li>
+    `;
+  });
+
+  document.getElementById('taskList').innerHTML = tasksHTML;
+
+  document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', (e) => {
+      const index = e.target.dataset.index;
+      tasksList[index].checked = e.target.checked;
+  
+      const taskText = e.target.nextElementSibling;
+      taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+    });
+  
+    const taskText = checkbox.nextElementSibling;
+    if (checkbox.checked) {
+      taskText.style.textDecoration = 'line-through';
+    }
+  });
+  
+}
 
 // ANIMATION FOR QUESTION CARDS TRANSITION
 function nextCard() {
@@ -125,18 +222,14 @@ function nextCard() {
 
 // CONTINUE BUTTON OF QUESTION 2 CARD
 goalsContinueElement.addEventListener('click', () => {
-  const mainPageEl = document.getElementById('mainPage')
-  const questionCardEl = document.getElementById('questionCard');
-
   questionCardEl.classList.add('fade-out')
 
   setTimeout(() => {
     questionCardEl.classList.add('hidden');
-
     mainPageEl.classList.remove('hidden');
     mainPageEl.classList.add('fade-in');
   }, 500);
-
+  localStorage.setItem('questionAsked','true')
 
 })
 
