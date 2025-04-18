@@ -1,6 +1,6 @@
 const rangeInput = document.getElementById('yearsRange');
 const rangeValue = document.getElementById('rangeValue');
-const yearsContinueElement = document.getElementById('yearsContinue')
+const yearsContinueElement = document.getElementById('yearsContinue');
 const yearsError = document.getElementById('yearsError');
 const questionNumber = document.getElementById('cardNumber');
 const addGoalsElement = document.getElementById('addGoals');
@@ -12,7 +12,12 @@ const focusElement = document.getElementById('focusButton');
 const shortBreakElement = document.getElementById('shortBreakButton');
 const longBreakElement = document.getElementById('longBreakButton');
 const questionCardEl = document.getElementById('questionCard');
-const mainPageEl = document.getElementById('mainPage')
+const mainPageEl = document.getElementById('mainPage');
+const settingElement = document.getElementById('settings');
+const countdownDays = document.getElementById('countdownDays');
+const countdownHours = document.getElementById('countdownHours');
+const countdownMinutes = document.getElementById('countdownMinutes');
+const countdownSeconds = document.getElementById('countdownSeconds');
 const goalsList = [];
 const tasksList = [];
 
@@ -22,8 +27,10 @@ let currentCard = 1;
 
 if (localStorage.getItem('questionAsked') === 'true') {
   questionCardEl.classList.add('hidden');
-  mainPageEl.classList.remove('hidden')
+  mainPageEl.classList.remove('hidden');
 }
+
+countdownTimer();
 
 // UPDATED THE CARD NUMBER 
 questionNumber.innerHTML = `${currentCard}/2`
@@ -48,6 +55,7 @@ yearsContinueElement.addEventListener('click', () => {
     yearsError.innerHTML = ''
     rangeValue.style.borderColor = 'black'
     yearsValue = Number(rangeInput.value);
+    localStorage.setItem('yearsInput',JSON.stringify(yearsValue))
     nextCard();
   }
 })
@@ -118,7 +126,7 @@ function addGoals(goal) {
 }
 
 // THIS FUNCTION WILL RENDER THE TODO AND UPDATES
-function renderGoalsList () {
+function renderGoalsList() {
   let goalsHTML = '';
   let goalsHTMLMain = '';
 
@@ -142,20 +150,20 @@ function renderGoalsList () {
   document.getElementById('goalsList').innerHTML = goalsHTML;
   document.getElementById('goalsListMain').innerHTML = goalsHTMLMain;
 
-document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
-  checkbox.addEventListener('change', (e) => {
-    const index = e.target.dataset.index;
-    goalsList[index].checked = e.target.checked;
+  document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', (e) => {
+      const index = e.target.dataset.index;
+      goalsList[index].checked = e.target.checked;
 
-    const goalText = e.target.nextElementSibling;
-    goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+      const goalText = e.target.nextElementSibling;
+      goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+    });
+
+    const goalText = checkbox.nextElementSibling;
+    if (checkbox.checked) {
+      goalText.style.textDecoration = 'line-through';
+    }
   });
-
-  const goalText = checkbox.nextElementSibling;
-  if (checkbox.checked) {
-    goalText.style.textDecoration = 'line-through';
-  }
-});
 
 }
 
@@ -164,7 +172,7 @@ function addTask(task) {
   tasksList.push({ text: task, checked: false });
   renderTasksList();
 }
-function renderTasksList () {
+function renderTasksList() {
   let tasksHTML = '';
 
   tasksList.forEach((taskObject, index) => {
@@ -187,17 +195,17 @@ function renderTasksList () {
     checkbox.addEventListener('change', (e) => {
       const index = e.target.dataset.index;
       tasksList[index].checked = e.target.checked;
-  
+
       const taskText = e.target.nextElementSibling;
       taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
     });
-  
+
     const taskText = checkbox.nextElementSibling;
     if (checkbox.checked) {
       taskText.style.textDecoration = 'line-through';
     }
   });
-  
+
 }
 
 // ANIMATION FOR QUESTION CARDS TRANSITION
@@ -229,15 +237,14 @@ goalsContinueElement.addEventListener('click', () => {
     mainPageEl.classList.remove('hidden');
     mainPageEl.classList.add('fade-in');
   }, 500);
-  localStorage.setItem('questionAsked','true')
+  localStorage.setItem('questionAsked', 'true')
 
 })
 
-
-
-shortBreakElement.addEventListener('click',() => toggleButton(shortBreakElement));
-focusElement.addEventListener('click',() => toggleButton(focusElement));
-longBreakElement.addEventListener('click',() => toggleButton(longBreakElement));
+// POMODORO BUTTONS 
+shortBreakElement.addEventListener('click', () => toggleButton(shortBreakElement));
+focusElement.addEventListener('click', () => toggleButton(focusElement));
+longBreakElement.addEventListener('click', () => toggleButton(longBreakElement));
 
 function toggleButton(buttonElement) {
 
@@ -247,7 +254,7 @@ function toggleButton(buttonElement) {
   } else {
     buttonElement.classList.remove('timer-is-toggled');
   }
-  
+
 }
 
 function turnOffPreviousButton() {
@@ -256,6 +263,53 @@ function turnOffPreviousButton() {
     previousButton.classList.remove('timer-is-toggled');
   };
 }
+
+function countdownTimer() {
+
+  const storedYearsInput = JSON.parse(localStorage.getItem('YearsInput'));
+  let updateSeconds = 0;
+  let updateMinutes = 0;
+  let updateHours = 0;
+  let updateDays = storedYearsInput * 365;
+
+  countdownSeconds.innerHTML = '00';
+  countdownMinutes.innerHTML = '00';
+  countdownHours.innerHTML = '00';
+  countdownDays.innerHTML = updateDays;
+
+  const timerInterval = setInterval(() => {
+    if (updateSeconds > 0) {
+      updateSeconds--;
+    } else {
+      if (updateMinutes > 0) {
+        updateMinutes--;
+        updateSeconds = 59;
+      } else {
+        if (updateHours > 0) {
+          updateHours--;
+          updateMinutes = 59;
+          updateSeconds = 59;
+        } else {
+          if (updateDays > 0) {
+            updateDays--;
+            updateHours = 23;
+            updateMinutes = 59;
+            updateSeconds = 59;
+          } else {
+            clearInterval(timerInterval);
+            return;
+          }
+        }
+      }
+    }
+
+    countdownSeconds.innerHTML = updateSeconds.toString().padStart(2, '0');
+    countdownMinutes.innerHTML = updateMinutes.toString().padStart(2, '0');
+    countdownHours.innerHTML = updateHours.toString().padStart(2, '0');
+    countdownDays.innerHTML = updateDays.toString();
+  }, 1000);
+}
+
 
 
 /* 

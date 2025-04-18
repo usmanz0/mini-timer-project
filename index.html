@@ -16,7 +16,7 @@
   <!-- HEADER -->
   <header class="main-heading">
     <h1 class="logo-text">The Countdown</h1>
-    <button class="settings-button" aria-label="Settings"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></button>
+    <button class="settings-button" id="settings" aria-label="Settings"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></button>
   </header>
 
   <!-- OVERLAY -->
@@ -77,19 +77,19 @@
   <section class="main-page hidden" id="mainPage">
     <section class="countdown-timer-section">
       <div class="time-unit">
-        <span class="time-value">18960</span>
+        <span class="time-value" id="countdownDays">00</span>
         <small>DAYS</small>
       </div>
       <div class="time-unit">
-        <span class="time-value">22</span>
+        <span class="time-value" id="countdownHours">00</span>
         <small>HOURS</small>
       </div>
       <div class="time-unit">
-        <span class="time-value">35</span>
+        <span class="time-value" id="countdownMinutes">00</span>
         <small>MINUTES</small>
       </div>
       <div class="time-unit">
-        <span class="time-value">45</span>
+        <span class="time-value" id="countdownSeconds"></span>
         <small>SECONDS</small>
       </div>
     </section>
@@ -99,18 +99,18 @@
       <div class="timer-content">
         <div class="timer">
           <div class="time-unit">
-            <span class="time-value">22</span>
+            <span class="time-value">00</span>
             <small>MINUTES</small>
           </div>
           <p class="timer-seperator">:</p>
           <div class="time-unit">
-            <span class="time-value">35</span>
+            <span class="time-value">00</span>
             <small>SECONDS</small>
           </div>
         </div>
   
         <ul class="pomodoro-timer-button-list">
-          <li><button class="timer-button paragraph-text timer-button" id="focusButton">FOCUS</button></li>
+          <li><button class="timer-button paragraph-text timer-button timer-is-toggled" id="focusButton">FOCUS</button></li>
           <li><button class="paragraph-text timer-button" id="shortBreakButton">SHORT BREAK</button></li>
           <li><button class="paragraph-text timer-button" id="longBreakButton">LONG BREAK</button></li>
         </ul>
