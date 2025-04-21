@@ -313,7 +313,7 @@ function countdownTimer() {
 
 
 /* 
-Optimized Rendering - Orphelo Motapa
+Optimized Rendering
 function renderGoals(withCheckbox = false) {
   const target = document.getElementById('goalsList');
   if (!target) return;
