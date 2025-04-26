@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Timer</title>
+  <link rel="stylesheet" href="styles/general.css">
+  <link rel="stylesheet" href="styles/settings.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,400;0,700;1,400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,400;0,700;1,400&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="main-heading">
+    <h1 class="logo-text">The Countdown</h1>
+    <button class="settings-button" id="settings" aria-label="Settings"><a href="settings.html"><img
+          src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></a></button>
+  </header>
+
+  <section class="settings-page hidden" id="settingPage">
+    <div class="settings-heading">
+      <h1 class="heading-text">Settings</h1>
+      <button class="settings-close-button" id="closeButton"><a href="index.html"><img src="images/cross icon.svg" alt="closeSettings"></a></button>
+    </div>
+
+    <div class="settings-panel-container">
+
+      <div class="setting-item">
+        <label for="darkModeToggle">
+          <strong>Dark Mode</strong>
+          <br>
+          <small>Toggle dark mode</small>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider" id="darkModeSlider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <label for="changeYearsInput">
+          <strong>Change Years Input</strong>
+          <br>
+          <small>for the countdown timer / Tap to change</small>
+        </label>
+        <label class="input-number">
+          <input type="number" id="changeYearsInput" placeholder="00" max="100" min="0" oninput="
+          this.value = this.value
+            .substring(0, 3);
+          ">
+          <small>/yrs</small>
+        </label>
+      </div>
+    
+
+      <div class="pomodoro-settings-container">
+        <div class="pomodoro-settings-heading">
+          <strong>Pomodoro Settings</strong>
+          <br>
+          <small>change the base settings of the pomodoro timer</small>
+        </div>
+
+        <div class="setting-item">
+          <label for="focusInput">
+            <p>Focus</p>
+          </label>
+
+          <label class="input-number">
+            <input type="number" id="focusInput" placeholder="00" max="100" min="0" oninput="
+            this.value = this.value
+              .substring(0, 3);
+            ">
+            <small>/Mins</small>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label for="shortBreakInput">
+            <p>Short Break</p>
+          </label>
+
+          <label class="input-number">
+            <input type="number" id="changeYearsInput" placeholder="00" max="100" min="0" oninput="
+            this.value = this.value
+              .substring(0, 3);
+            ">
+            <small>/Mins</small>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Long Break</p>
+          </label>
+
+          <label class="input-number" id="longBreakInput">
+            <input type="number" id="longBreakInput" placeholder="00" max="100" min="0" oninput="
+            this.value = this.value
+              .substring(0, 3);
+            ">
+            <small>/Mins</small>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Remove Completed Tasks</p>
+            <small>Clear the completed tasks in the Tasks section</small>
+          </label>
+
+          <label class="switch" id="">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Remove Completed Goals</p>
+            <small>Clear the completed goals in the Goals section</small>
+          </label>
+
+          <label class="switch" id="">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="visibility-settings-container">
+        <div class="visibility-settings-heading">
+          <strong>Change Visibility</strong>
+          <br>
+          <small>Change the Visibility of the sections</small>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Goals</p>
+            <small>Toggle Visibility of the Goals Section</small>
+          </label>
+
+          <label class="switch" id="">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Tasks</p>
+            <small>Toggle Visibility of the Tasks Section</small>
+          </label>
+
+          <label class="switch" id="">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <p>Pomodoro</p>
+            <small>Toggle Visibility of the Pomodoro Section</small>
+          </label>
+
+          <label class="switch" id="">
+            <input type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="scripts/settings.js"></script>
+</body>
+
+</html>

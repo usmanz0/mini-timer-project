@@ -16,7 +16,7 @@
   <!-- HEADER -->
   <header class="main-heading">
     <h1 class="logo-text">The Countdown</h1>
-    <button class="settings-button" id="settings" aria-label="Settings"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></button>
+    <button class="settings-button" id="settings" aria-label="Settings"><a href="settings.html"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></a></button>
   </header>
 
   <!-- OVERLAY -->
@@ -40,7 +40,10 @@
 
       <label for="yearsRange" class="visually-hidden">Select remaining years</label>
 
-      <input class="years-counter" id="rangeValue" type="text" placeholder="00">
+      <input class="years-counter" id="rangeValue" type="number" placeholder="00" oninput="
+      this.value = this.value
+        .substring(0, 3);
+      ">
 
       <input
         id="yearsRange"
@@ -140,6 +143,7 @@
         <button class="add-goals-button-main label-text" id="addGoalsMain">ADD</button>
       </div>
     </section>
+    
   </section>
 
   <script src="scripts/index.js"></script>

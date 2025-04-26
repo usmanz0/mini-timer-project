@@ -24,20 +24,21 @@ const tasksList = [];
 let yearsValue;
 let currentCard = 1;
 
-
-if (localStorage.getItem('questionAsked') === 'true') {
-  questionCardEl.classList.add('hidden');
-  mainPageEl.classList.remove('hidden');
-}
-
+checkUserState();
 countdownTimer();
+
+function checkUserState() {
+  if (localStorage.getItem('questionAsked') === 'true') {
+    questionCardEl.classList.add('hidden');
+    mainPageEl.classList.remove('hidden');
+  }
+}
 
 // UPDATED THE CARD NUMBER 
 questionNumber.innerHTML = `${currentCard}/2`
 
 // INPUT RANGE STYLING
 rangeInput.addEventListener('input', () => {
-  rangeValue.style.color = 'black';
   rangeValue.value = rangeInput.value.padStart(2, '0');
 });
 
@@ -310,6 +311,9 @@ function countdownTimer() {
   }, 1000);
 }
 
+function openSettings() {
+  
+}
 
 
 /* 

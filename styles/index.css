@@ -49,19 +49,22 @@
   color: rgba(0, 0, 0, 0.2);
 }
 
+
+
 .years-counter {
+  color: black;
   font-size: 18px;
   border: 1px black solid;
-  padding: 9px 10px;
+  padding: 9px 3px;
   width: 52px;
   border-radius: 8px;
-  color: rgba(0, 0, 0, 0.2);
   margin: 16px 0;
   text-align: center;
 }
 
 .years-selector {
   appearance: none;
+
   height: 6px;  
   background: #dedede;  
   border-radius: 3px;  
@@ -389,4 +392,30 @@
   border-radius: 8px;
   padding: 8px 16px;
   cursor: pointer;
+}
+
+
+/* DARK MODE  */
+
+/* Default (Light Mode) */
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Dark Mode */
+body.dark {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Example: Dark mode for specific items */
+body.dark .main-heading,
+body.dark .content-heading {
+  color: #ffffff;
+}
+
+body.dark .task-list li,
+body.dark .goals-list li {
+  color: #cccccc;
 }
