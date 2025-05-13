@@ -132,3 +132,27 @@ strong {
   flex-direction: column;
   gap: 12px;
 }
+
+.apply-button {
+  padding: 8px 16px;
+  background-color: rgba(44, 44, 44, 1);
+  border: none;
+  border-radius: 8px;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background-color: rgb(27, 27, 27);
+}
+
+p.dark-mode,
+strong.dark-mode,
+small.dark-mode,
+h1.dark-mode {
+  color: rgb(232, 232, 232);
+}
+
+.main-heading.dark-mode {
+  background-color: rgb(53, 53, 53);
+}

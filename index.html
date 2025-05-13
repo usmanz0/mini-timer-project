@@ -13,12 +13,13 @@
 
 </head>
 <body>
+  
   <!-- HEADER -->
   <header class="main-heading">
     <h1 class="logo-text">The Countdown</h1>
     <button class="settings-button" id="settings" aria-label="Settings"><a href="settings.html"><img src="images/settings.png" alt="settings" width="24" height="24" loading="lazy" decoding="async"></a></button>
   </header>
-
+  <button id="testButton">TEST</button>
   <!-- OVERLAY -->
   <div class="overlay hidden" role="dialog" aria-modal="true">
     <div class="goals-modal">
@@ -92,7 +93,7 @@
         <small>MINUTES</small>
       </div>
       <div class="time-unit">
-        <span class="time-value" id="countdownSeconds"></span>
+        <span class="time-value" id="countdownSeconds">00</span>
         <small>SECONDS</small>
       </div>
     </section>

@@ -18,6 +18,7 @@ const countdownDays = document.getElementById('countdownDays');
 const countdownHours = document.getElementById('countdownHours');
 const countdownMinutes = document.getElementById('countdownMinutes');
 const countdownSeconds = document.getElementById('countdownSeconds');
+const testBtnEl = document.getElementById('testButton');
 const goalsList = [];
 const tasksList = [];
 
@@ -25,12 +26,12 @@ let yearsValue;
 let currentCard = 1;
 
 checkUserState();
-countdownTimer();
 
 function checkUserState() {
   if (localStorage.getItem('questionAsked') === 'true') {
     questionCardEl.classList.add('hidden');
     mainPageEl.classList.remove('hidden');
+    countdownTimer();
   }
 }
 
@@ -60,6 +61,12 @@ yearsContinueElement.addEventListener('click', () => {
     nextCard();
   }
 })
+
+testBtnEl.addEventListener('click', () => {
+  
+  
+});
+  
 
 // LOGIC FOR CLOSING AND OPENING OVERLAY
 let interactionStartedOnModal = false;
@@ -239,7 +246,7 @@ goalsContinueElement.addEventListener('click', () => {
     mainPageEl.classList.add('fade-in');
   }, 500);
   localStorage.setItem('questionAsked', 'true')
-
+  countdownTimer();
 })
 
 // POMODORO BUTTONS 
@@ -266,55 +273,49 @@ function turnOffPreviousButton() {
 }
 
 function countdownTimer() {
+  const storedYearsInput = JSON.parse(localStorage.getItem('yearsInput')) || 1;
 
-  const storedYearsInput = JSON.parse(localStorage.getItem('YearsInput'));
-  let updateSeconds = 0;
-  let updateMinutes = 0;
-  let updateHours = 0;
-  let updateDays = storedYearsInput * 365;
+  if (!localStorage.getItem('endDate')) {
+    const now = new Date();
+    const endDate = new Date(now);
+    endDate.setFullYear(now.getFullYear() + storedYearsInput);
+    localStorage.setItem('endDate', endDate.toISOString());
+  }
 
-  countdownSeconds.innerHTML = '00';
-  countdownMinutes.innerHTML = '00';
-  countdownHours.innerHTML = '00';
-  countdownDays.innerHTML = updateDays;
+  const endDate = new Date(localStorage.getItem('endDate'));
 
-  const timerInterval = setInterval(() => {
-    if (updateSeconds > 0) {
-      updateSeconds--;
-    } else {
-      if (updateMinutes > 0) {
-        updateMinutes--;
-        updateSeconds = 59;
-      } else {
-        if (updateHours > 0) {
-          updateHours--;
-          updateMinutes = 59;
-          updateSeconds = 59;
-        } else {
-          if (updateDays > 0) {
-            updateDays--;
-            updateHours = 23;
-            updateMinutes = 59;
-            updateSeconds = 59;
-          } else {
-            clearInterval(timerInterval);
-            return;
-          }
-        }
-      }
+  function updateCountdown() {
+    const now = new Date();
+    const diffInSeconds = Math.floor((endDate - now) / 1000);
+
+    if (diffInSeconds <= 0) {
+      countdownDays.innerHTML = '00';
+      countdownHours.innerHTML = '00';
+      countdownMinutes.innerHTML = '00';
+      countdownSeconds.innerHTML = '00';
+      return;
     }
 
-    countdownSeconds.innerHTML = updateSeconds.toString().padStart(2, '0');
-    countdownMinutes.innerHTML = updateMinutes.toString().padStart(2, '0');
-    countdownHours.innerHTML = updateHours.toString().padStart(2, '0');
-    countdownDays.innerHTML = updateDays.toString();
+    const days = Math.floor(diffInSeconds / (3600 * 24));
+    const hours = Math.floor((diffInSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((diffInSeconds % 3600) / 60);
+    const seconds = diffInSeconds % 60;
+
+    countdownDays.innerHTML = days;
+    countdownHours.innerHTML = hours.toString().padStart(2, '0');
+    countdownMinutes.innerHTML = minutes.toString().padStart(2, '0');
+    countdownSeconds.innerHTML = seconds.toString().padStart(2, '0');
+  }
+  updateCountdown();
+  
+  const timerInterval = setInterval(() => {
+    updateCountdown();
   }, 1000);
 }
+w
+function startPomodoro(time) {
 
-function openSettings() {
-  
 }
-
 
 /* 
 Optimized Rendering

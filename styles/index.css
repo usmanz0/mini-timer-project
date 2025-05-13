@@ -291,6 +291,7 @@
   border: none;
   background: transparent;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .timer-is-toggled {
