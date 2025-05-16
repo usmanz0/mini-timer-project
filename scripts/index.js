@@ -8,9 +8,9 @@ const overlay = document.querySelector('.overlay');
 const addGoalsModalElement = document.getElementById('addGoalsModal');
 const goalsContinueElement = document.getElementById('goalsContinue');
 const addGoalsMainElement = document.getElementById('addGoalsMain');
-const focusElement = document.getElementById('focusButton');
-const shortBreakElement = document.getElementById('shortBreakButton');
-const longBreakElement = document.getElementById('longBreakButton');
+const focusElement = document.getElementById('focus');
+const shortBreakElement = document.getElementById('shortBreak');
+const longBreakElement = document.getElementById('longBreak');
 const questionCardEl = document.getElementById('questionCard');
 const mainPageEl = document.getElementById('mainPage');
 const settingElement = document.getElementById('settings');
@@ -19,6 +19,11 @@ const countdownHours = document.getElementById('countdownHours');
 const countdownMinutes = document.getElementById('countdownMinutes');
 const countdownSeconds = document.getElementById('countdownSeconds');
 const testBtnEl = document.getElementById('testButton');
+const btn = document.getElementById('playPauseBtn');
+const timerMinutesEl = document.getElementById('timerMinutes');
+const timerSecondsEl = document.getElementById('timerSeconds');
+const timerButtonsEl = document.querySelectorAll('.timer-button');
+const timerResetEl = document.getElementById('resetTimerBtn');
 const goalsList = [];
 const tasksList = [];
 
@@ -27,6 +32,13 @@ let currentCard = 1;
 
 checkUserState();
 
+if (localStorage.getItem('isDarkModeToggled') === 'true') {
+  document.body.classList.add('dark-mode');
+    ['p', 'strong', 'small' , 'h1', '.main-heading', '.content-heading', '.timer', '.countdown-timer-section', '.settings-image'].forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => el.classList.add('dark-mode'));
+  });
+}
+
 function checkUserState() {
   if (localStorage.getItem('questionAsked') === 'true') {
     questionCardEl.classList.add('hidden');
@@ -34,6 +46,8 @@ function checkUserState() {
     countdownTimer();
   }
 }
+
+
 
 // UPDATED THE CARD NUMBER 
 questionNumber.innerHTML = `${currentCard}/2`
@@ -63,7 +77,7 @@ yearsContinueElement.addEventListener('click', () => {
 })
 
 testBtnEl.addEventListener('click', () => {
-  
+  checkToggledPomodoroButton();
   
 });
   
@@ -249,12 +263,17 @@ goalsContinueElement.addEventListener('click', () => {
   countdownTimer();
 })
 
-// POMODORO BUTTONS 
-shortBreakElement.addEventListener('click', () => toggleButton(shortBreakElement));
-focusElement.addEventListener('click', () => toggleButton(focusElement));
-longBreakElement.addEventListener('click', () => toggleButton(longBreakElement));
+// POMODORO LOGIC 
+let intervalId = null;
+let isRunning = false;
 
-function toggleButton(buttonElement) {
+displayPomodoroTimer();
+
+shortBreakElement.addEventListener('click', () => handleToggle(shortBreakElement));
+focusElement.addEventListener('click', () => handleToggle(focusElement));
+longBreakElement.addEventListener('click', () => handleToggle(longBreakElement));
+
+function handleToggle(buttonElement) {
 
   if (!buttonElement.classList.contains('timer-is-toggled')) {
     turnOffPreviousButton();
@@ -263,14 +282,72 @@ function toggleButton(buttonElement) {
     buttonElement.classList.remove('timer-is-toggled');
   }
 
+  displayPomodoroTimer();
+}
+
+function displayPomodoroTimer() {
+  const toggledEl = document.querySelector('.timer-is-toggled');
+  if (!toggledEl) {
+    timerMinutesEl.innerHTML = '00';
+  } else {
+    timerMinutesEl.innerHTML = checkToggledPomodoroButton();
+  }
+}
+
+// PLAY AND PAUSE BUTTON LOGIC
+btn.addEventListener('click', () => {
+  btn.classList.toggle('stop');
+  if (btn.classList.contains('stop')) {
+    startTimer(checkToggledPomodoroButton());
+  } else {
+    clearInterval(intervalId);
+    isRunning = false;
+  }
+});
+
+timerResetEl.addEventListener('click', () => {
+  resetTimer();
+})
+
+function startTimer(minutes) {
+  let seconds = minutes * 60;
+  if(!isRunning) {
+    intervalId = setInterval(() => {
+      if (seconds <= 0) {
+        clearInterval(intervalId);
+        isRunning = false;
+        return
+      }
+
+      seconds --;
+
+      timerMinutesEl.innerHTML = Math.floor(seconds / 60).toString().padStart(2, '0');
+      timerSecondsEl.innerHTML = (seconds % 60).toString().padStart(2, '0')
+    }, 1000);
+    isRunning = true;
+  }
+}
+
+function resetTimer() {
+  clearInterval(intervalId);
+  isRunning = false;
+  btn.classList.remove('stop');
+  timerSecondsEl.innerHTML = '00'
+}
+
+
+function checkToggledPomodoroButton() {
+  const activeId = document.querySelector('.timer-is-toggled')?.id;
+  return JSON.parse(localStorage.getItem(activeId)) || '00';
 }
 
 function turnOffPreviousButton() {
-  let previousButton = document.querySelector('.timer-is-toggled');
+  const previousButton = document.querySelector('.timer-is-toggled');
   if (previousButton) {
     previousButton.classList.remove('timer-is-toggled');
-  };
+  }
 }
+
 
 function countdownTimer() {
   const storedYearsInput = JSON.parse(localStorage.getItem('yearsInput')) || 1;
@@ -312,10 +389,8 @@ function countdownTimer() {
     updateCountdown();
   }, 1000);
 }
-w
-function startPomodoro(time) {
 
-}
+
 
 /* 
 Optimized Rendering
@@ -337,3 +412,17 @@ function renderGoals(withCheckbox = false) {
 
   target.innerHTML = html;
 } */
+
+    // let seconds = 59;
+  // setInterval(()=> {
+  //   if (minutes >= 0 && seconds > 0) {
+  //     seconds --;
+  //     if (seconds === 0 && minutes > 0) {
+  //       minutes --;
+  //       seconds = 59
+  //     }
+  //   }
+  //   timerMinutesEl.innerHTML = minutes.toString().padStart(2, '0');
+  //   timerSecondsEl.innerHTML = seconds.toString().padStart(2, '0')
+
+  // }, 10)

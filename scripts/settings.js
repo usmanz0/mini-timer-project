@@ -6,6 +6,10 @@ const remCompTaskEl = document.getElementById('remCompTask');
 const remCompGoalEl = document.getElementById('remCompGoal');
 const closeButtonEl = document.getElementById('closeButton');
 const applyButtonEl = document.getElementById('applySettingButton');
+const focusInputEl = document.getElementById('focusInput');
+const shortBreakInputEl = document.getElementById('shortBreakInput');
+const longBreakInputEl = document.getElementById('longBreakInput');
+
 
 // CHECKS BUTTON TOGGLE STATE
 checkToggleBtn();
@@ -21,17 +25,23 @@ toggleEvent(remCompTaskEl,'isRemCompTaskToggled');
 // APPLIES SETTING 
 applySetting();
 
+console.log(JSON.parse(localStorage.getItem('focusInput'))) 
+
 function applySetting() {
   applyButtonEl.addEventListener('click', () => {
     checkDarkMode();
+    pomodoroTimerInput(focusInputEl);
+    pomodoroTimerInput(shortBreakInputEl);
+    pomodoroTimerInput(longBreakInputEl);
   })
   checkDarkMode();
 }
 
-function checkDarkMode() {
+export function checkDarkMode() {
   if (localStorage.getItem('isDarkModeToggled') === 'true') {
+    console.log('hello')
     document.body.classList.add('dark-mode');
-    ['p', 'strong', 'small' , 'h1', '.main-heading'].forEach(selector => {
+    ['p', 'strong', 'small' , 'h1', '.content-heading'].forEach(selector => {
     document.querySelectorAll(selector).forEach(el => el.classList.add('dark-mode'));
     });
 
@@ -76,4 +86,10 @@ function checkToggleBtn() {
   if (localStorage.getItem('isRemCompGoalToggled') === 'true') {
     remCompGoalEl.checked = true;
   }
+}
+
+function pomodoroTimerInput(input) {
+  const inputValue = input.value
+  const inputId = input.id.slice(0, -5);
+  localStorage.setItem(`${inputId}`, JSON.stringify(inputValue));
 }
