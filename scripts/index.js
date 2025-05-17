@@ -299,6 +299,7 @@ btn.addEventListener('click', () => {
   btn.classList.toggle('stop');
   if (btn.classList.contains('stop')) {
     startTimer(checkToggledPomodoroButton());
+    timerResetEl.classList.remove('hidden');
   } else {
     clearInterval(intervalId);
     isRunning = false;
@@ -306,7 +307,8 @@ btn.addEventListener('click', () => {
 });
 
 timerResetEl.addEventListener('click', () => {
-  resetTimer();
+  resetTimer(checkToggledPomodoroButton());
+  timerResetEl.classList.add('hidden')
 })
 
 function startTimer(minutes) {
@@ -328,11 +330,12 @@ function startTimer(minutes) {
   }
 }
 
-function resetTimer() {
+function resetTimer(minutes) {
   clearInterval(intervalId);
   isRunning = false;
   btn.classList.remove('stop');
   timerSecondsEl.innerHTML = '00'
+  timerMinutesEl.innerHTML = minutes
 }
 
 
