@@ -29,7 +29,7 @@ export function renderGoalsList() {
     `;
   });
 
-  document.getElementById('goalsListMain').innerHTML = goalsList.length >= 0 ? goalsHTML : '<p style="color: rgb(200, 200, 200)">Added tasks are shown here</p>';
+  document.getElementById('goalsListMain').innerHTML = goalsList.length > 0 ? goalsHTML : '<p style="color: rgb(200, 200, 200)">Added tasks are shown here</p>';
 
   document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
     checkbox.addEventListener('change', (e) => {

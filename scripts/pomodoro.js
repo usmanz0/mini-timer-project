@@ -18,15 +18,18 @@ export function renderPomodoro() {
   longBreakElement.addEventListener('click', () => handleToggle(longBreakElement));
 
   function handleToggle(buttonElement) {
-
-    if (!buttonElement.classList.contains('timer-is-toggled')) {
+    if (isRunning === false) {
+      if (!buttonElement.classList.contains('timer-is-toggled')) {
       turnOffPreviousButton();
       buttonElement.classList.add('timer-is-toggled');
-    } else {
-      buttonElement.classList.remove('timer-is-toggled');
-    }
+      } else {
+        buttonElement.classList.remove('timer-is-toggled');
+      }
 
-    displayPomodoroTimer();
+      displayPomodoroTimer();
+    }
+    
+
   }
 
   function displayPomodoroTimer() {
@@ -45,8 +48,7 @@ export function renderPomodoro() {
       startTimer(checkToggledPomodoroButton());
       timerResetEl.classList.remove('hidden');
     } else {
-      clearInterval(intervalId);
-      isRunning = false;
+      clearInterval(intervalId); 
     }
   });
 
@@ -57,7 +59,7 @@ export function renderPomodoro() {
 
   function startTimer(minutes) {
     let seconds = minutes * 60;
-    if(!isRunning) {
+
       intervalId = setInterval(() => {
         if (seconds <= 0) {
           clearInterval(intervalId);
@@ -71,7 +73,7 @@ export function renderPomodoro() {
         timerSecondsEl.innerHTML = (seconds % 60).toString().padStart(2, '0')
       }, 1000);
       isRunning = true;
-    }
+    
   }
 
   function resetTimer(minutes) {
