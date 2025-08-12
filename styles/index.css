@@ -321,12 +321,29 @@
   background-color: rgba(33, 33, 33, 1);
   border: solid 1px rgba(125, 125, 125, 0.17);
   border-radius: 8px;
-  padding: 8px 11px;
+  padding: 7px 10px;
   margin-left: 24px;
   transition: display 2s ease, margin 1.5s ease;
 }
 
+.reset-button img {
+  display: block;
+}
 
+.play {
+  background-color: rgba(33, 33, 33, 1);
+  border: 1px solid rgba(125, 125, 125, 0.17);
+  border-radius: 8px;
+  padding: 8px 11px;
+}
+
+.play img {
+  display: block;
+}
+
+.play.stop img{
+  content: url(/images/lightmode-pause.svg);
+}
 
 /* GOALS SECTION */
 .goals-content,
@@ -359,14 +376,7 @@
   -ms-overflow-style: none;       
 }
 
-.goals-list-main li,
-.task-list li {
- display: flex;
- gap: 8px;
- align-items: center;
-}
 
-/* General checkbox base */
 .goals-main-checkbox,
 .task-checkbox {
   -webkit-appearance: none;
@@ -412,6 +422,33 @@
   cursor: pointer;
 }
 
+.todo-item-left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.task-item,
+.goals-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todolist-delete-button {
+  background-color: rgb(196, 0, 0);
+  color: rgb(232, 232, 232);
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todolist-delete-button:hover {
+  transform: scale(1.05);
+}
+
+.todolist-delete-button:active {
+    background-color: rgb(181, 0, 0);
+}
 
 /* DARK MODE  */
 
