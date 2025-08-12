@@ -463,9 +463,17 @@
   content: url(/images/darkmode-settings.png);
 }
 
-.pomodoro-timer-button-list.dark-mode {
-  color: white;
+.pomodoro-timer-button-list li .timer-button.dark-mode {
+  color: rgba(255, 255, 255, 0.559);
 }
+
+.pomodoro-timer-button-list li .timer-is-toggled.dark-mode {
+  color: rgba(41, 41, 41, 1);
+  background-color: rgb(255, 255, 255);
+}
+
+
+
 
 
 
