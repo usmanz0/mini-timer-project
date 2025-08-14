@@ -156,3 +156,14 @@ h1.dark-mode {
 .main-heading.dark-mode {
   background-color: rgb(53, 53, 53);
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

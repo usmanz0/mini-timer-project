@@ -103,33 +103,39 @@
   text-align: left;
   margin: 16px 0 0;
   padding: 0 4px 0 0;
-
-  scrollbar-width: auto;         
+  
   -ms-overflow-style: none;       
 }
-/* Hide scrollbar track (Chrome, Safari, Edge) */
+
 .goals-list::-webkit-scrollbar,
 .goals-list-main::-webkit-scrollbar,
 .task-list::-webkit-scrollbar {
   width: 10px;
-  background: transparent;         /* Removes track visibility */
+  background: transparent;
 }
 
-/* Only show slim black thumb */
+
 .goals-list::-webkit-scrollbar-thumb,
 .goals-list-main::-webkit-scrollbar-thumb,
 .task-list::-webkit-scrollbar-thumb {
   background-color: rgb(83, 83, 83);
   border-radius: 8px;
-  border: 2px solid transparent; /* Creates "margin" inside the track */
+  border: 2px solid transparent;
   background-clip: content-box;
 }
 
-/* Hide scrollbar corner (for scrollable areas that intersect) */
 .goals-list::-webkit-scrollbar-corner,
 .goals-list-main::-webkit-scrollbar-corner,
 .task-list::-webkit-scrollbar-corner{
   background: transparent;
+}
+
+.goals-list,
+.goals-list-main,
+.task-list {
+
+  scrollbar-width: thin; 
+  scrollbar-color: rgb(83, 83, 83) transparent;
 }
 
 .goals-list li {
@@ -372,7 +378,6 @@
   flex-direction: column;
   gap: 16px;
 
-  scrollbar-width: auto;         
   -ms-overflow-style: none;       
 }
 
@@ -472,7 +477,16 @@
   background-color: rgb(255, 255, 255);
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
 
 
