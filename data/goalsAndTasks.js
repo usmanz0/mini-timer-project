@@ -3,10 +3,14 @@ export let tasksList = JSON.parse(localStorage.getItem('tasksList')) || [];
 
 export function removeAllTodos (todo) {
   if (todo === 'goal') {
-    const uncheckedGoals = goalsList.filter((goal) => goal.checked === false); 
+    const uncheckedGoals = goalsList.filter((goal) => goal.checked === false);
+    goalsList = uncheckedGoals
     saveToStorage('goalsList',uncheckedGoals)
+    
+    renderGoalsList()
   } else {
     const uncheckedTasks = tasksList.filter((task) => task.checked === false); 
+    tasksList = uncheckedTasks
     saveToStorage('tasksList',uncheckedTasks)
   }
 }
@@ -21,8 +25,7 @@ export function addGoals(goal) {
 
 export function renderGoalsList() {
   let goalsHTML = '';
-  console.log('hello');
-  
+
   goalsList.forEach((goal, index) => {
     goalsHTML += ` 
       <li class="paragraph-text goals-item" id="goalsMain">
@@ -51,18 +54,13 @@ export function renderGoalsList() {
       goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
       saveToStorage('goalsList',goalsList)
-
       removeAllTodos('goal')
-      window.location.reload()
     });
 
     const goalText = checkbox.nextElementSibling;
     if (checkbox.checked) {
       goalText.style.textDecoration = 'line-through';
     }
-
-    
-    
   });
 
   document.querySelectorAll('.goals-delete-button').forEach((button) => {
@@ -74,8 +72,10 @@ export function renderGoalsList() {
       renderGoalsList(); 
     });
   });
-
 }
+
+
+
 
 export function addTask(task) {
 
@@ -120,7 +120,7 @@ export function renderTasksList() {
       taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
       removeAllTodos('task')
-      window.location.reload()
+      renderTasksList()
     });
 
     const taskText = checkbox.nextElementSibling;
