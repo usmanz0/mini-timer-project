@@ -43,13 +43,16 @@ export function renderPomodoro() {
 
   // PLAY AND PAUSE BUTTON LOGIC
   btn.addEventListener('click', () => {
-    btn.classList.toggle('stop');
-    if (btn.classList.contains('stop')) {
-      startTimer(checkToggledPomodoroButton());
-      timerResetEl.classList.remove('hidden');
-    } else {
-      clearInterval(intervalId); 
-    }
+
+      btn.classList.toggle('stop');
+      if (btn.classList.contains('stop')) {
+        startTimer(checkToggledPomodoroButton());
+        timerResetEl.classList.remove('hidden');
+      } else {
+        clearInterval(intervalId); 
+      }
+    
+
   });
 
   timerResetEl.addEventListener('click', () => {

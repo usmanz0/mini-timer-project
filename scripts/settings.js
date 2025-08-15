@@ -53,19 +53,20 @@ function applySetting() {
 
     if (remCompTaskEl.checked) {
       localStorage.setItem('isRemCompTaskToggled','true')
+      removeAllTodos('task')
     } else {
       localStorage.setItem('isRemCompTaskToggled','false')
     }
 
     if (remCompGoalEl.checked) {
       localStorage.setItem('isRemCompGoalToggled','true')
+      removeAllTodos('goal')
     } else {
       localStorage.setItem('isRemCompGoalToggled','false')
     }
 
   })
-  
-}
+  }
 
 function updateInputPlaceholder() {
   if (savedSettings.focus === '') {
@@ -126,4 +127,12 @@ function pomodoroTimerInput(input) {
   const inputId = input.id.slice(0, -5);
 
   localStorage.setItem(`${inputId}`, JSON.stringify(inputValue));
+}
+
+function removeAllTodos (todo) {
+  if (todo === 'goal') {
+    localStorage.removeItem('goalsList');
+  } else {
+    localStorage.removeItem('tasksList')
+  }
 }
