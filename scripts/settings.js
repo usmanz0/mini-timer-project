@@ -1,3 +1,5 @@
+import { goalsList,tasksList, saveToStorage, removeAllTodos } from "../data/goalsAndTasks.js";
+
 const darkModeEl = document.getElementById('darkModeToggle');
 const goalVisibleEl = document.getElementById('goalVisibleToggle');
 const taskVisibleEl = document.getElementById('taskVisibleToggle');
@@ -24,10 +26,14 @@ const savedSettings = {
   longBreak: JSON.parse(localStorage.getItem('longBreak'))
 };
 
-checkToggleBtn();
-checkDarkMode();
-updateInputPlaceholder();
-applySetting();
+function initializeSettingsPage() {
+  checkToggleBtn();
+  checkDarkMode();
+  updateInputPlaceholder();
+  applySetting()
+}
+
+initializeSettingsPage();
 
 function applySetting() {
   applyButtonEl.addEventListener('click', () => {
@@ -129,10 +135,3 @@ function pomodoroTimerInput(input) {
   localStorage.setItem(`${inputId}`, JSON.stringify(inputValue));
 }
 
-function removeAllTodos (todo) {
-  if (todo === 'goal') {
-    localStorage.removeItem('goalsList');
-  } else {
-    localStorage.removeItem('tasksList')
-  }
-}

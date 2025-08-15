@@ -1,6 +1,16 @@
-let goalsList = JSON.parse(localStorage.getItem('goalsList')) || [];
-let tasksList = JSON.parse(localStorage.getItem('tasksList')) || []; 
-console.log(tasksList);
+export let goalsList = JSON.parse(localStorage.getItem('goalsList')) || [];
+export let tasksList = JSON.parse(localStorage.getItem('tasksList')) || []; 
+
+export function removeAllTodos (todo) {
+  if (todo === 'goal') {
+    const uncheckedGoals = goalsList.filter((goal) => goal.checked === false); 
+    saveToStorage('goalsList',uncheckedGoals)
+  } else {
+    const uncheckedTasks = tasksList.filter((task) => task.checked === false); 
+    saveToStorage('tasksList',uncheckedTasks)
+  }
+}
+
 
 export function addGoals(goal) {
   goalsList.push({ text: goal, checked: false });
@@ -11,7 +21,8 @@ export function addGoals(goal) {
 
 export function renderGoalsList() {
   let goalsHTML = '';
-
+  console.log('hello');
+  
   goalsList.forEach((goal, index) => {
     goalsHTML += ` 
       <li class="paragraph-text goals-item" id="goalsMain">
@@ -40,12 +51,18 @@ export function renderGoalsList() {
       goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
       saveToStorage('goalsList',goalsList)
+
+      removeAllTodos('goal')
+      window.location.reload()
     });
 
     const goalText = checkbox.nextElementSibling;
     if (checkbox.checked) {
       goalText.style.textDecoration = 'line-through';
     }
+
+    
+    
   });
 
   document.querySelectorAll('.goals-delete-button').forEach((button) => {
@@ -101,6 +118,9 @@ export function renderTasksList() {
 
       const taskText = e.target.nextElementSibling;
       taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+
+      removeAllTodos('task')
+      window.location.reload()
     });
 
     const taskText = checkbox.nextElementSibling;
@@ -122,6 +142,6 @@ export function renderTasksList() {
 }
 
 
-function saveToStorage (key, data) {
+export function saveToStorage (key, data) {
   localStorage.setItem(key ,JSON.stringify(data))
 }
