@@ -24,8 +24,8 @@ const savedSettings = {
   longBreak: JSON.parse(localStorage.getItem('longBreak'))
 };
 
-checkDarkMode();
 checkToggleBtn();
+checkDarkMode();
 updateInputPlaceholder();
 applySetting();
 
@@ -38,26 +38,33 @@ function applySetting() {
       localStorage.setItem('isDarkModeToggled', 'false')
       checkDarkMode()
     }
-    if (savedSettings.focus !== timerInputs.focusInputEl.placeholder) {
+
+    if (savedSettings.focus !== timerInputs.focusInputEl.value && timerInputs.focusInputEl.value !== '') {
       pomodoroTimerInput(timerInputs.focusInputEl);
     }
-    if (savedSettings.shortBreak !== timerInputs.shortBreakInputEl.placeholder) {
+
+    if (savedSettings.shortBreak !== timerInputs.shortBreakInputEl.value && timerInputs.shortBreakInputEl.value !== '') {
       pomodoroTimerInput(timerInputs.shortBreakInputEl);
     }
-    if (savedSettings.longBreak !== timerInputs.longBreakInputEl.placeholder) {
+
+    if (savedSettings.longBreak !== timerInputs.longBreakInputEl.value && timerInputs.longBreakInputEl.value !== '') {
       pomodoroTimerInput(timerInputs.longBreakInputEl);
     }
+
     if (remCompTaskEl.checked) {
       localStorage.setItem('isRemCompTaskToggled','true')
     } else {
       localStorage.setItem('isRemCompTaskToggled','false')
     }
+
     if (remCompGoalEl.checked) {
       localStorage.setItem('isRemCompGoalToggled','true')
     } else {
       localStorage.setItem('isRemCompGoalToggled','false')
     }
+
   })
+  
 }
 
 function updateInputPlaceholder() {
