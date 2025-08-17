@@ -59,15 +59,18 @@ export function renderGoalsList() {
         goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
         saveToStorage('goalsList',goalsList)
-
-        if (checkbox.checked) {
-          goalText.style.textDecoration = 'line-through';
-          
+        if (savedSettings.isRemCompGoalToggled === 'true') {
+          setTimeout(() =>  {
+            removeAllTodos('goal')
+          }, 200)
         }
-        setTimeout(() =>  {
-          removeAllTodos('goal')
-        }, 200)
+        
       });
+
+      const  goalText = checkbox.nextElementSibling
+      if (checkbox.checked) {
+        goalText.style.textDecoration = 'line-through';
+      }
     });
 
     document.querySelectorAll('.goals-delete-button').forEach((button) => {
@@ -113,7 +116,7 @@ export function renderTasksList() {
         </li>
       `;
     });
-
+    
     document.getElementById('taskList').innerHTML = tasksList.length > 0 ? tasksHTML : '<p style="color: rgb(200, 200, 200);">Added tasks are shown here</p>';
 
     document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
@@ -125,15 +128,17 @@ export function renderTasksList() {
 
         const taskText = e.target.nextElementSibling;
         taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
-
-        if (checkbox.checked) {
-        taskText.style.textDecoration = 'line-through';
+         
+        if (savedSettings.isRemCompTaskToggled === 'true') {
+          setInterval(() => {
+              removeAllTodos('task');
+          }, 200)
         }
-
-        setInterval(() => {
-          removeAllTodos('task');
-        }, 200)
       });
+      const taskText = checkbox.nextElementSibling
+      if (checkbox.checked) {
+        taskText.style.textDecoration = 'line-through';
+      }
     });
 
     document.querySelectorAll('.tasks-delete-button').forEach((button) => {
