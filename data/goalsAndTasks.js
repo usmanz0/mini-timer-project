@@ -1,3 +1,4 @@
+import { savedSettings } from "../scripts/settings.js";
 export let goalsList = JSON.parse(localStorage.getItem('goalsList')) || [];
 export let tasksList = JSON.parse(localStorage.getItem('tasksList')) || []; 
 
@@ -12,12 +13,14 @@ export function removeAllTodos (todo) {
     const uncheckedTasks = tasksList.filter((task) => task.checked === false); 
     tasksList = uncheckedTasks
     saveToStorage('tasksList',uncheckedTasks)
+
+    renderTasksList()
   }
 }
 
 
 export function addGoals(goal) {
-  goalsList.push({ text: goal, checked: false });
+  goalsList.push({ goals: goal, checked: false });
 
   saveToStorage('goalsList',goalsList)
   renderGoalsList();
@@ -36,7 +39,7 @@ export function renderGoalsList() {
           data-index="${index}" 
           ${goal.checked ? 'checked' : ''}
         >
-        <p>${goal.text}</p>
+        <p>${goal.goals}</p>
         </div>
         <button class="todolist-delete-button goals-delete-button" data-index= "${index}">Delete</button>
       </li>
@@ -54,13 +57,15 @@ export function renderGoalsList() {
       goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
       saveToStorage('goalsList',goalsList)
-      removeAllTodos('goal')
-    });
 
-    const goalText = checkbox.nextElementSibling;
-    if (checkbox.checked) {
-      goalText.style.textDecoration = 'line-through';
-    }
+      if (checkbox.checked) {
+        goalText.style.textDecoration = 'line-through';
+        
+      }
+      setTimeout(() =>  {
+        removeAllTodos('goal')
+      }, 200)
+    });
   });
 
   document.querySelectorAll('.goals-delete-button').forEach((button) => {
@@ -79,7 +84,7 @@ export function renderGoalsList() {
 
 export function addTask(task) {
 
-  tasksList.push({text: task, checked: false});
+  tasksList.push({tasks: task, checked: false});
 
   saveToStorage('tasksList',tasksList)
 
@@ -100,7 +105,7 @@ export function renderTasksList() {
           data-index="${index}" 
           ${taskObject.checked ? 'checked' : ''}
         >
-        <p>${taskObject.text}</p>
+        <p>${taskObject.tasks}</p>
         </div>
         <button class="todolist-delete-button tasks-delete-button" data-index= "${index}">Delete</button>
       </li>
@@ -119,14 +124,14 @@ export function renderTasksList() {
       const taskText = e.target.nextElementSibling;
       taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
 
-      removeAllTodos('task')
-      renderTasksList()
-    });
-
-    const taskText = checkbox.nextElementSibling;
-    if (checkbox.checked) {
+      if (checkbox.checked) {
       taskText.style.textDecoration = 'line-through';
-    }
+      }
+
+      setInterval(() => {
+        removeAllTodos('task');
+      }, 200)
+    });
   });
 
   document.querySelectorAll('.tasks-delete-button').forEach((button) => {

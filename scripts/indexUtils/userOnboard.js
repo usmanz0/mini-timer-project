@@ -1,5 +1,5 @@
 import { countdownTimer } from "./countdown.js";
-import { addGoals, addTask} from "../data/goalsAndTasks.js";
+import { addGoals, addTask} from "../../data/goalsAndTasks.js";
 
 export function renderUserOnBoard() {
   const rangeInput = document.getElementById('yearsRange');
