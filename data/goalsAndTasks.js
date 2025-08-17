@@ -27,60 +27,62 @@ export function addGoals(goal) {
 }
 
 export function renderGoalsList() {
-  let goalsHTML = '';
+  if (savedSettings.isGoalVisibleToggled === 'false') {
+    console.log(savedSettings.isGoalVisibleToggled)
+    let goalsHTML = '';
 
-  goalsList.forEach((goal, index) => {
-    goalsHTML += ` 
-      <li class="paragraph-text goals-item" id="goalsMain">
-         <div class="todo-item-left-section">
-        <input 
-          class="goals-main-checkbox" 
-          type="checkbox" 
-          data-index="${index}" 
-          ${goal.checked ? 'checked' : ''}
-        >
-        <p>${goal.goals}</p>
-        </div>
-        <button class="todolist-delete-button goals-delete-button" data-index= "${index}">Delete</button>
-      </li>
-    `;
-  });
-
-  document.getElementById('goalsListMain').innerHTML = goalsList.length > 0 ? goalsHTML : '<p style="color: rgb(200, 200, 200)">Added tasks are shown here</p>';
-
-  document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
-    checkbox.addEventListener('change', (e) => {
-      const index = e.target.dataset.index;
-      goalsList[index].checked = e.target.checked;
-
-      const goalText = e.target.nextElementSibling;
-      goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
-
-      saveToStorage('goalsList',goalsList)
-
-      if (checkbox.checked) {
-        goalText.style.textDecoration = 'line-through';
-        
-      }
-      setTimeout(() =>  {
-        removeAllTodos('goal')
-      }, 200)
+    goalsList.forEach((goal, index) => {
+      goalsHTML += ` 
+        <li class="paragraph-text goals-item" id="goalsMain">
+          <div class="todo-item-left-section">
+          <input 
+            class="goals-main-checkbox" 
+            type="checkbox" 
+            data-index="${index}" 
+            ${goal.checked ? 'checked' : ''}
+          >
+          <p>${goal.goals}</p>
+          </div>
+          <button class="todolist-delete-button goals-delete-button" data-index= "${index}">Delete</button>
+        </li>
+      `;
     });
-  });
+  
+    document.getElementById('goalsListMain').innerHTML = goalsList.length > 0 ? goalsHTML : '<p style="color: rgb(200, 200, 200)">Added tasks are shown here</p>';
 
-  document.querySelectorAll('.goals-delete-button').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      const indexToDelete = e.target.dataset.index;
-      goalsList.splice(indexToDelete, 1); 
+    document.querySelectorAll('.goals-main-checkbox').forEach((checkbox) => {
+      checkbox.addEventListener('change', (e) => {
+        const index = e.target.dataset.index;
+        goalsList[index].checked = e.target.checked;
 
-      saveToStorage('goalsList',goalsList)
-      renderGoalsList(); 
+        const goalText = e.target.nextElementSibling;
+        goalText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+
+        saveToStorage('goalsList',goalsList)
+
+        if (checkbox.checked) {
+          goalText.style.textDecoration = 'line-through';
+          
+        }
+        setTimeout(() =>  {
+          removeAllTodos('goal')
+        }, 200)
+      });
     });
-  });
+
+    document.querySelectorAll('.goals-delete-button').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const indexToDelete = e.target.dataset.index;
+        goalsList.splice(indexToDelete, 1); 
+
+        saveToStorage('goalsList',goalsList)
+        renderGoalsList(); 
+      });
+    });
+  } else {
+    document.querySelector('.goals-section').classList.add('hidden')
+  }
 }
-
-
-
 
 export function addTask(task) {
 
@@ -92,59 +94,63 @@ export function addTask(task) {
 }
 
 export function renderTasksList() {
-  let tasksHTML = '';
+  if (savedSettings.isTaskVisibleToggled === 'false') {
+    let tasksHTML = '';
 
-
-  tasksList.forEach((taskObject, index) => {
-    tasksHTML += `
-      <li class="paragraph-text task-item">
-        <div class="todo-item-left-section">
-        <input 
-          class="task-checkbox" 
-          type="checkbox" 
-          data-index="${index}" 
-          ${taskObject.checked ? 'checked' : ''}
-        >
-        <p>${taskObject.tasks}</p>
-        </div>
-        <button class="todolist-delete-button tasks-delete-button" data-index= "${index}">Delete</button>
-      </li>
-    `;
-  });
-
-  document.getElementById('taskList').innerHTML = tasksList.length > 0 ? tasksHTML : '<p style="color: rgb(200, 200, 200);">Added tasks are shown here</p>';
-
-  document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
-    checkbox.addEventListener('change', (e) => {
-      const index = e.target.dataset.index;
-      tasksList[index].checked = e.target.checked;
-
-      saveToStorage('tasksList',tasksList)
-
-      const taskText = e.target.nextElementSibling;
-      taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
-
-      if (checkbox.checked) {
-      taskText.style.textDecoration = 'line-through';
-      }
-
-      setInterval(() => {
-        removeAllTodos('task');
-      }, 200)
+    tasksList.forEach((taskObject, index) => {
+      tasksHTML += `
+        <li class="paragraph-text task-item">
+          <div class="todo-item-left-section">
+          <input 
+            class="task-checkbox" 
+            type="checkbox" 
+            data-index="${index}" 
+            ${taskObject.checked ? 'checked' : ''}
+          >
+          <p>${taskObject.tasks}</p>
+          </div>
+          <button class="todolist-delete-button tasks-delete-button" data-index= "${index}">Delete</button>
+        </li>
+      `;
     });
-  });
 
-  document.querySelectorAll('.tasks-delete-button').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      const indexToDelete = e.target.dataset.index;
+    document.getElementById('taskList').innerHTML = tasksList.length > 0 ? tasksHTML : '<p style="color: rgb(200, 200, 200);">Added tasks are shown here</p>';
 
-      tasksList.splice(indexToDelete, 1); 
+    document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
+      checkbox.addEventListener('change', (e) => {
+        const index = e.target.dataset.index;
+        tasksList[index].checked = e.target.checked;
 
-      saveToStorage('tasksList',tasksList)
-      renderTasksList(); 
+        saveToStorage('tasksList',tasksList)
+
+        const taskText = e.target.nextElementSibling;
+        taskText.style.textDecoration = e.target.checked ? 'line-through' : 'none';
+
+        if (checkbox.checked) {
+        taskText.style.textDecoration = 'line-through';
+        }
+
+        setInterval(() => {
+          removeAllTodos('task');
+        }, 200)
+      });
     });
-  });
+
+    document.querySelectorAll('.tasks-delete-button').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const indexToDelete = e.target.dataset.index;
+
+        tasksList.splice(indexToDelete, 1); 
+
+        saveToStorage('tasksList',tasksList)
+        renderTasksList(); 
+      });
+    });
+  } else {
+    document.querySelector('.task-section').classList.add('hidden')
+  }
 }
+
 
 
 export function saveToStorage (key, data) {
