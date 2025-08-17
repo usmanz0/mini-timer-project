@@ -1,4 +1,4 @@
-import { savedSettings } from "./GetSavedSettings.js";
+import { savedSettings } from "./getSavedSettings.js";
 export function updateInputPlaceholder() {
 
   const timerInputs = {

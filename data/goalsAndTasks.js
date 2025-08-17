@@ -1,4 +1,4 @@
-import { savedSettings } from "../scripts/settings.js";
+import { savedSettings } from "../scripts/settingsUtils/getSavedSettings.js";
 export let goalsList = JSON.parse(localStorage.getItem('goalsList')) || [];
 export let tasksList = JSON.parse(localStorage.getItem('tasksList')) || []; 
 

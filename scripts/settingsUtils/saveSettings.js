@@ -1,8 +1,14 @@
-import { savedSettings } from "./GetSavedSettings.js"
+import { savedSettings, pomodoroTimerInput } from "./getSavedSettings.js"
 import { checkDarkMode } from "./checkDarkMode.js"
 
 
 export function applySetting() {
+  const darkModeEl = document.getElementById('darkModeToggle');
+  const goalVisibleEl = document.getElementById('goalVisibleToggle');
+  const taskVisibleEl = document.getElementById('taskVisibleToggle');
+  const pomodoroVisibleEl = document.getElementById('pomodoroVisibleToggle');
+  const remCompTaskEl = document.getElementById('remCompTask');
+  const remCompGoalEl = document.getElementById('remCompGoal');
   const applyButtonEl = document.getElementById('applySettingButton');
 
   const timerInputs = {
@@ -10,7 +16,7 @@ export function applySetting() {
     shortBreakInputEl : document.getElementById('shortBreakInput'),
     longBreakInputEl : document.getElementById('longBreakInput')
   }
-  
+
   applyButtonEl.addEventListener('click', () => {
     if (darkModeEl.checked) {
       localStorage.setItem('isDarkModeToggled', 'true')
