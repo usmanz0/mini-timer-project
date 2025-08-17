@@ -1,5 +1,5 @@
 import { savedSettings, pomodoroTimerInput } from "./getSavedSettings.js"
-import { checkDarkMode } from "./checkDarkMode.js"
+import { checkDarkMode } from "./checkSettingsDarkMode.js"
 
 
 export function applySetting() {
