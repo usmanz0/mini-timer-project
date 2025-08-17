@@ -1,6 +1,6 @@
 import { checkDarkMode } from "./settingsUtils/checkSettingsDarkMode.js";
 import { checkToggleBtn } from "./settingsUtils/checkToggles.js";
-import { updateInputPlaceholder } from "./settingsUtils/UpdateInputButton.js";
+import { updateInputPlaceholder } from "./settingsUtils/updateInputButton.js";
 import { applySetting } from "./settingsUtils/saveSettings.js";
 
 function initializeSettingsPage() {

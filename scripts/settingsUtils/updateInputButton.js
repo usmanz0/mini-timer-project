@@ -1,6 +1,6 @@
 import { savedSettings } from "../settingsUtils/getSavedSettings.js";
-export function updateInputPlaceholder() {
 
+export function updateInputPlaceholder() {
   const timerInputs = {
     focusInputEl : document.getElementById('focusInput'),
     shortBreakInputEl : document.getElementById('shortBreakInput'),
