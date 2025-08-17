@@ -1,4 +1,4 @@
-import { savedSettings } from "./getSavedSettings.js";
+import { savedSettings } from "../settingsUtils/getSavedSettings.js";
 
 export function checkToggleBtn() {
   const darkModeEl = document.getElementById('darkModeToggle');
