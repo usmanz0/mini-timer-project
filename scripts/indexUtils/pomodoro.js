@@ -1,4 +1,5 @@
 import { savedSettings } from "../settingsUtils/getSavedSettings.js";
+
 export function renderPomodoro() {
   const btn = document.getElementById('playPauseBtn');
   const timerMinutesEl = document.getElementById('timerMinutes');
