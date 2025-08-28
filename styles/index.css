@@ -395,6 +395,7 @@
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin-top: 3px;
 }
 
 .goals-main-checkbox:checked,
@@ -430,7 +431,7 @@
 
 .todo-item-left-section {
   display: flex;
-  align-items: center;
+
   gap: 10px;
   overflow-wrap: anywhere;  
   flex-grow: 1;
@@ -438,11 +439,12 @@
 
 
 
+
 .task-item,
 .goals-item {
   display: flex;
   gap: 8px;
-  align-items: center;
+
 }
 
 .todolist-delete-button {
