@@ -104,7 +104,7 @@
   margin: 16px 0 0;
   padding: 0 4px 0 0;
   
-  -ms-overflow-style: none;       
+  -ms-overflow-style: none;   
 }
 
 .goals-list::-webkit-scrollbar,
@@ -370,14 +370,15 @@
   width: 395px;
   height: 240px;
   overflow-y: scroll;
-  word-wrap: break-word;
+  
   border: none;
   border-radius: 8px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
+  gap: 16px;
+  overflow-x: hidden;
   -ms-overflow-style: none;       
 }
 
@@ -386,7 +387,7 @@
 .task-checkbox {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
+  min-width: 16px;
   height: 16px;
   border-radius: 4px;
   background-color: #b3b3b3;
@@ -431,11 +432,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  overflow-wrap: anywhere;  
+  flex-grow: 1;
 }
+
+
+
 .task-item,
 .goals-item {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
 }
 
 .todolist-delete-button {
@@ -445,6 +452,7 @@
   padding: 4px;
   border-radius: 4px;
   cursor: pointer;
+  height: fit-content;
 }
 
 .todolist-delete-button:hover {

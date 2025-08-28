@@ -28,7 +28,6 @@ export function addGoals(goal) {
 
 export function renderGoalsList() {
   if (savedSettings.isGoalVisibleToggled === 'false') {
-    console.log(savedSettings.isGoalVisibleToggled)
     let goalsHTML = '';
 
     goalsList.forEach((goal, index) => {
