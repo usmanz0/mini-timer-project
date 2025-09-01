@@ -27,7 +27,8 @@ export function addGoals(goal) {
 }
 
 export function renderGoalsList() {
-  if (savedSettings.isGoalVisibleToggled === 'false') {
+  if (savedSettings.isGoalVisibleToggled !== 'true') {
+    
     let goalsHTML = '';
 
     goalsList.forEach((goal, index) => {
@@ -83,6 +84,7 @@ export function renderGoalsList() {
     });
   } else {
     document.querySelector('.goals-section').classList.add('hidden')
+    
   }
 }
 
@@ -96,7 +98,7 @@ export function addTask(task) {
 }
 
 export function renderTasksList() {
-  if (savedSettings.isTaskVisibleToggled === 'false') {
+  if (savedSettings.isTaskVisibleToggled !== 'true') {
     let tasksHTML = '';
 
     tasksList.forEach((taskObject, index) => {
