@@ -21,7 +21,7 @@
     <h1 class="logo-text">The Countdown</h1>
   </header>
 
-  <section class="settings-page hidden" id="settingPage">
+  <section class="settings-page " id="settingPage">
     <div class="settings-heading">
       <h1 class="heading-text">Settings</h1>
       <button class="settings-close-button" id="closeButton"><a href="index.html"><img src="images/cross icon.svg" alt="closeSettings"></a></button>
@@ -177,6 +177,15 @@
     </div>
 
     <button class="label-text apply-button" id="applySettingButton">Apply Settings</button>
+
+    <div class="apply-settings-overlay hidden">
+      <div class="apply-settings-modal">
+        <span style="font-weight: bold; text-align: center;">APPLIED SUCCESSFULLY</span>
+        <hr style="background-color: rgb(72, 72, 72); height: 1px; border: none; border-radius: 8px;">
+        <p style="font-size: 14px; text-align: center; color: rgb(206, 206, 206);">Settings have been applied successfully.</p>
+      </div>
+    </div>
+    
   </section>
 
   <script type="module" src="scripts/settings.js"></script>

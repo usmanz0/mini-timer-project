@@ -167,3 +167,33 @@ input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+
+.apply-settings-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: rgb(33, 33, 33);
+  width: fit-content;
+  height: fit-content;
+  padding: 24px 32px;
+  border-radius: 8px;
+  color: rgb(235, 235, 235);
+  border: 1px rgb(203, 203, 203) solid;
+}
+
+.apply-settings-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+}
+
+.hidden {
+  display: none;
+}

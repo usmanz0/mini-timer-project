@@ -18,6 +18,10 @@ export function applySetting() {
   }
 
   applyButtonEl.addEventListener('click', () => {
+    document.querySelector('.apply-settings-overlay').classList.remove('hidden')
+    setTimeout(() => {
+      document.querySelector('.apply-settings-overlay').classList.add('hidden')
+    },2000)
     if (darkModeEl.checked) {
       localStorage.setItem('isDarkModeToggled', 'true')
       checkDarkMode()

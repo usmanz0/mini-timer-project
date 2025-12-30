@@ -15,7 +15,7 @@ export function renderUserOnBoard() {
   
   const questionCardEl = document.getElementById('questionCard');
   const mainPageEl = document.getElementById('mainPage');
-  const settingElement = document.getElementById('settings');
+  const settingEl = document.getElementById('settings');
   
   let yearsValue;
   let currentCard = 1;
@@ -27,6 +27,9 @@ export function renderUserOnBoard() {
       questionCardEl.classList.add('hidden');
       mainPageEl.classList.remove('hidden');
       countdownTimer();
+      settingEl.classList.remove('hidden')
+    } else {
+      settingEl.classList.add('hidden')
     }
   }
 
@@ -148,5 +151,6 @@ export function renderUserOnBoard() {
     }, 500);
     localStorage.setItem('questionAsked', 'true')
     countdownTimer();
+    settingEl.classList.remove('hidden')
   })
 }
